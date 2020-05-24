@@ -3,7 +3,20 @@
 #include <stdarg.h>
 #include <string.h>
 
-double sum_double(int n, ...)
+
+
+double sum(int n, double x, ...)
+{
+	double result = x;
+	for (double* ptr = &x; n > 0; n--)
+	{
+		result += *(++ptr);
+	}
+	return result;
+}
+
+
+double sum_double_strarg(int n, ...)
 {
 	va_list arglist;
 	va_start(arglist, n);
@@ -47,7 +60,8 @@ int main()
 {
 
 	//printf("%d\n ", sizeof(int*));
-	printf("%lf\n", sum_double(4, 1.1, 2.2, 3.0, 0.1));
+	printf("%lf\n", sum(4, 1.1, 2.2, 3.0, 0.1));
+	printf("%lf\n", sum_double_strarg(4, 1.1, 2.2, 3.0, 0.1));
 	char* s;
 	s = concat("One ", "Two ", "Two ","Two ", "\0");
 	printf("%s\n", s);
